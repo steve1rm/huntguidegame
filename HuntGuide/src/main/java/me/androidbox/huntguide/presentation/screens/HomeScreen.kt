@@ -10,11 +10,11 @@ fun HomeScreen(
     onClickStart: () -> Unit
 ) {
 
-        Button(
-            onClick = onClickStart
-        ) {
-            Text("Hunt Guide")
-        }
+    Button(
+        onClick = onClickStart
+    ) {
+        Text("Hunt Guide")
+    }
 
 }
 
