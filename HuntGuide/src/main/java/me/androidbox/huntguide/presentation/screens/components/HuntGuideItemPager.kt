@@ -66,6 +66,8 @@ fun <T> HuntGuideItemPager(
         }
     )
 
+    val coroutineScope = rememberCoroutineScope()
+
     LaunchedEffect(true) {
         println("LaunchedEffect")
 
@@ -120,7 +122,15 @@ fun <T> HuntGuideItemPager(
         HorizontalPager(
             state = pagerState,
             pageSpacing = 16.dp,
-            modifier = modifier.wrapContentHeight()
+            modifier = modifier
+                .fillMaxSize()
+                .clickable {
+                    if(pagerState.currentPage < items.count()) {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        }
+                    }
+                }
         ) { pageIndex ->
 
             when(pageIndex) {
