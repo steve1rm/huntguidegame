@@ -31,6 +31,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -42,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -55,7 +57,7 @@ fun <T> HuntGuideItemPager(
     val pagerState = rememberPagerState(
         initialPage = 0,
         pageCount = {
-            /** Always plus 1 for the view all page as the final page */
+            /** Always plus 1 for the final page if available */
              if(lastItemContent != null) {
                  items.count() + 1
              } else {
@@ -63,6 +65,20 @@ fun <T> HuntGuideItemPager(
              }
         }
     )
+
+    LaunchedEffect(true) {
+
+        while(true) {
+            delay(1_000)
+            var nextPage = pagerState.currentPage + 1
+
+            if(nextPage >= items.count()) {
+                /* Reset the next page to be the first page, to start over again */
+                nextPage = 0
+            }
+            pagerState.animateScrollToPage(nextPage)
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
