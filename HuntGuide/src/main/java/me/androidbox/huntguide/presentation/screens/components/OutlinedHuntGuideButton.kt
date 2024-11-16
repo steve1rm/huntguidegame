@@ -47,7 +47,7 @@ fun OutlinedHuntGuideButton(
         Spacer(modifier = Modifier.width(8.dp))
 
         Column() {
-            Text(text = stringResource(R.string.start_button_title), color = Color.White, fontSize = 14.sp)
+            Text(text = stringResource(R.string.start_button_title).uppercase(), color = Color.White, fontSize = 14.sp)
 
             Text(text = stringResource(R.string.start_button_subtitle), color = Color.White, fontSize = 11.sp)
         }

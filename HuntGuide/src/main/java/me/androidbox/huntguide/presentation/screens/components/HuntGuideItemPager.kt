@@ -91,7 +91,7 @@ fun <T> HuntGuideItemPager(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+        modifier = modifier.fillMaxSize().padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -105,7 +105,7 @@ fun <T> HuntGuideItemPager(
                 ),
                 imageVector = Icons.Default.Close,
                 contentDescription = "Close the hunt guide",
-                tint = Color.Black
+                tint = Color.White
             )
 
             repeat(pagerState.pageCount) { iteration ->
