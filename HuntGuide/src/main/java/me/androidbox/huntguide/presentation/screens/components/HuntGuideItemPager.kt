@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, FlowPreview::class)
 
 package me.androidbox.huntguide.presentation.screens.components
 
@@ -33,7 +33,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,8 +46,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 @Composable
@@ -67,22 +73,16 @@ fun <T> HuntGuideItemPager(
     )
 
     val coroutineScope = rememberCoroutineScope()
+    var isPaused by remember {
+        mutableStateOf(false)
+    }
 
     LaunchedEffect(true) {
-        println("LaunchedEffect")
-
-        while(true) {
-            delay(5_000)
-            var nextPage = pagerState.currentPage + 1
-            println("Next Page $nextPage")
-
-            if(nextPage >= items.count()) {
-                /* Reset the next page to be the first page, to start over again */
-                nextPage = 0
+        snapshotFlow { pagerState.currentPage }
+            .debounce(2000)
+            .collect { page ->
+                pagerState.animateScrollToPage(page + 1)
             }
-            pagerState.animateScrollToPage(nextPage)
-
-        }
     }
 
     Column(
@@ -135,6 +135,7 @@ fun <T> HuntGuideItemPager(
 
             when(pageIndex) {
                 in items.indices -> {
+                    isPaused = false
                     content(items[pageIndex])
                 }
 
