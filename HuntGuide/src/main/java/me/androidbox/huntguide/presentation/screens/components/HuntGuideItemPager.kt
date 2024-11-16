@@ -81,7 +81,12 @@ fun <T> HuntGuideItemPager(
         snapshotFlow { pagerState.currentPage }
             .debounce(2000)
             .collect { page ->
-                pagerState.animateScrollToPage(page + 1)
+                if(page >= items.count() -1) {
+                    pagerState.animateScrollToPage(0)
+                }
+                else {
+                    pagerState.animateScrollToPage(page + 1)
+                }
             }
     }
 
