@@ -50,9 +50,6 @@ fun populateItems(): List<HuntGuideModel> {
             title = "07 MASTER YOURLOADOUT"
         ),
         HuntGuideModel(
-            title = "07 MASTER YOURLOADOUT"
-        ),
-        HuntGuideModel(
             title = "08 MASTER YOURLOADOUT"
         ),
         HuntGuideModel(
@@ -60,6 +57,9 @@ fun populateItems(): List<HuntGuideModel> {
         ),
         HuntGuideModel(
             title = "10 MASTER YOURLOADOUT"
+        ),
+        HuntGuideModel(
+            title = "11 MASTER YOURLOADOUT"
         )
     )
 }
