@@ -67,16 +67,19 @@ fun <T> HuntGuideItemPager(
     )
 
     LaunchedEffect(true) {
+        println("LaunchedEffect")
 
         while(true) {
-            delay(1_000)
+            delay(5_000)
             var nextPage = pagerState.currentPage + 1
+            println("Next Page $nextPage")
 
             if(nextPage >= items.count()) {
                 /* Reset the next page to be the first page, to start over again */
                 nextPage = 0
             }
             pagerState.animateScrollToPage(nextPage)
+
         }
     }
 
