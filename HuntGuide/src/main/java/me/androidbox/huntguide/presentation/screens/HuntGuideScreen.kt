@@ -44,7 +44,7 @@ fun populateItems(): List<HuntGuideModel> {
         HuntGuideModel(
             title = "02 elixir",
             subTitle = "your energy source and lifeline",
-            body = "On Planet-X, everything you use is powered by elixir and you start each hunt with a full tank. This means your weapons, your scanner, your shield, anything with a power source relies on it.\n" +
+            body = "On Planet-X, everything you use is powered by elixir and you start each hunt with a full tank. This means your weapons, your scanner, your shield, anything with a power source relies on it.\n\n" +
                     "Since elixir is limited in each hunt, plan your usage carefully to get the most out of every action, giving yourself the best possible chance to win.",
             res = R.drawable.two
         ),
@@ -63,7 +63,7 @@ fun populateItems(): List<HuntGuideModel> {
         HuntGuideModel(
             title = "05 activating your minimap",
             subTitle = "find an omni cell",
-            body = "To unlock your mini-map you will have to Activate a Omni Cell situated on Planet-X. Omni cells shoot a distinct blue beam into the sky, which can be seen to try and locate them. Once your mini-map is activated you will be able to see key information such as other players carrying prizes, where chests have been found, how to find an extraction point and much more!\n",
+            body = "To unlock your mini-map you will have to Activate a Omni Cell situated on Planet-X. Omni cells shoot a distinct blue beam into the sky, which can be seen to try and locate them. Once your mini-map is activated you will be able to see key information such as other players carrying prizes, where chests have been found, how to find an extraction point and much more!",
             res = R.drawable.five
         ),
         HuntGuideModel(
@@ -81,39 +81,35 @@ fun populateItems(): List<HuntGuideModel> {
         HuntGuideModel(
             title = "08 extract a prize",
             subTitle = "become an official winner",
-            body = "If you happen to find a prize; you will need to extract it using an extraction rocket found on the mini-map to become an official winner. \n" +
-                    "Extraction rockets are dangerous areas as you could come across campers trying to steal your prize.\n" +
-                    "If you manage to successfully make it to the rocket, you will then need to input a 4 digit code which will appear on your screen for the extraction to be successful. \n",
+            body = "If you happen to find a prize; you will need to extract it using an extraction rocket found on the mini-map to become an official winner.\n\n" +
+                    "Extraction rockets are dangerous areas as you could come across campers trying to steal your prize.\n\n" +
+                    "If you manage to successfully make it to the rocket, you will then need to input a 4 digit code which will appear on your screen for the extraction to be successful.",
             res = R.drawable.eight
         ),
         HuntGuideModel(
             title = "09 using your shield",
             subTitle = "master your defence",
-            body = "Turning on your shield protects you from incoming fire whilst using elixir. This sheild however can be broken if it takes too much damage. If it does get broken, you’ll face a brief cooldown before being able to reactivate it, so time your defenses carefully!\n",
+            body = "Turning on your shield protects you from incoming fire whilst using elixir. This sheild however can be broken if it takes too much damage. If it does get broken, you’ll face a brief cooldown before being able to reactivate it, so time your defenses carefully!",
             res = R.drawable.nine
         ),
         HuntGuideModel(
             title = "10 using your drone",
             subTitle = "scout ahead tactically",
-            body = "Use your drone situated under your mini-map to help you scout for nearby enemies or ensures areas of the map are clear, such as the extraction rocket. You can also use it to lock on to enemy players, which then gives you the ability to hunt them down or see if they’re holding a prize at anytime. Since it consumes elixir, use it strategically to maximize your advantage without depleting your resources.\n",
+            body = "Use your drone situated under your mini-map to help you scout for nearby enemies or ensures areas of the map are clear, such as the extraction rocket. You can also use it to lock on to enemy players, which then gives you the ability to hunt them down or see if they’re holding a prize at anytime. Since it consumes elixir, use it strategically to maximize your advantage without depleting your resources.",
             res = R.drawable.ten
         ),
         HuntGuideModel(
             title = "11 stealing prizes",
             subTitle = "hunt down other players",
-            body = "When another player finds a prize, they will appear as a marked man on the mini-map for a few seconds, giving away their position. They will also have a visible pin above their head the entire time, showing other players they have a prize.\n" +
-                    "\n" +
-                    "Kill them and pick up their loot, to steal prizes. \n" +
-                    "\n",
+            body = "When another player finds a prize, they will appear as a marked man on the mini-map for a few seconds, giving away their position. They will also have a visible pin above their head the entire time, showing other players they have a prize.\n\n" +
+                    "Kill them and pick up their loot, to steal prizes.",
             res = R.drawable.eleven
         ),
         HuntGuideModel(
             title = "12 marked man indicators ",
-            subTitle = "MArked man:\n yellow & red",
-            body = "If an emery player is carrying X-tokens they will have a yellow icon above their head.\n" +
-                    "\n" +
-                    "If an enemy player is carrying a more valuable loot, an instant prize win, they will have a red pin above their head. \n" +
-                    "\n" +
+            subTitle = "Marked man:\nyellow & red",
+            body = "If an emery player is carrying X-tokens they will have a yellow icon above their head.\n\n" +
+                    "If an enemy player is carrying a more valuable loot, an instant prize win, they will have a red pin above their head. \n\n" +
                     "Use these indicators to know decide whether you want to engage in a fight or not.",
             res = R.drawable.twelve
         )
