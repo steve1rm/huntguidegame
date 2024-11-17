@@ -21,7 +21,7 @@ fun HuntGuideScreen(
         modifier = Modifier.background(color = Color.Black),
         items = huntGuideItems,
         content = { huntGuideItem ->
-            HuntGuideItemPage(
+            HuntGuidePageItem(
                 title = huntGuideItem.title,
                 subTitle = huntGuideItem.subTitle,
                 body = huntGuideItem.body,
