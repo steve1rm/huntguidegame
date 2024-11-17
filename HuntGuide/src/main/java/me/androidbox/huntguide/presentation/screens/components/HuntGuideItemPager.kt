@@ -2,14 +2,11 @@
 
 package me.androidbox.huntguide.presentation.screens.components
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,10 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,8 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,11 +51,11 @@ fun <T> HuntGuideItemPager(
         initialPage = 0,
         pageCount = {
             /** Always plus 1 for the final page if available */
-             if(lastItemContent != null) {
-                 items.count() + 1
-             } else {
-                 items.count()
-             }
+            if(lastItemContent != null) {
+                items.count() + 1
+            } else {
+                items.count()
+            }
         }
     )
 
@@ -73,9 +67,9 @@ fun <T> HuntGuideItemPager(
     val currentPageFlow = snapshotFlow { pagerState.currentPage }
     val isPausedFlow = snapshotFlow { isPaused }
 
-    LaunchedEffect(true) {
+    LaunchedEffect(isPaused) {
         /** Sets the slider duration of 2 seconds*/
-        combine(currentPageFlow.debounce(2_000), isPausedFlow) { currentPage, isPaused ->
+        combine(currentPageFlow.debounce(10_000), isPausedFlow) { currentPage, isPaused ->
             if (!isPaused) {
                 if (currentPage >= items.count() - 1) {
                     pagerState.animateScrollToPage(0)
@@ -127,12 +121,21 @@ fun <T> HuntGuideItemPager(
             pageSpacing = 16.dp,
             modifier = modifier
                 .fillMaxSize()
-                .clickable {
-                    if(pagerState.currentPage < items.count()) {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onPress = {
+                            isPaused = true
+                            tryAwaitRelease()
+                            isPaused = false
+                        },
+                        onTap = {
+                            if(pagerState.currentPage < items.count()) {
+                                coroutineScope.launch {
+                                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                                }
+                            }
                         }
-                    }
+                    )
                 }
         ) { pageIndex ->
 
@@ -147,6 +150,7 @@ fun <T> HuntGuideItemPager(
             }
         }
     }
+
 }
 @Preview
 @Composable
