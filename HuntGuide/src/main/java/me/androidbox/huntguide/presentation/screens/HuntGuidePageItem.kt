@@ -8,16 +8,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun HuntGuidePageItem(
@@ -35,8 +34,7 @@ fun HuntGuidePageItem(
             Text(
                 text = title.uppercase(),
                 color = Color.White,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.W900
+                style = MaterialTheme.typography.titleMedium
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -44,8 +42,7 @@ fun HuntGuidePageItem(
             Text(
                 text = subTitle.uppercase(),
                 color = Color.White,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.W900
+                style = MaterialTheme.typography.titleLarge
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -53,9 +50,7 @@ fun HuntGuidePageItem(
             Text(
                 text = body,
                 color = Color.White,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.W400,
-                lineHeight = 16.sp
+                style = MaterialTheme.typography.bodyMedium
             )
         }
 
