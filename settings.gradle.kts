@@ -19,5 +19,8 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "HuntGuideGame"
 include(":app")
+include(":HuntGuide")
