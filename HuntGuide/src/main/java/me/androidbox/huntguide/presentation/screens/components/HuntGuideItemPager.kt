@@ -64,14 +64,17 @@ fun <T> HuntGuideItemPager(
         mutableStateOf(false)
     }
 
+    /** So we can observe when the isPaused and current page has changed */
     val currentPageFlow = snapshotFlow { pagerState.currentPage }
     val isPausedFlow = snapshotFlow { isPaused }
 
     LaunchedEffect(isPaused) {
-        /** Sets the slider duration of 2 seconds*/
+        /** Sets the slider duration of 10 seconds,
+          * Will trigger when either current page or isPaused has changed  */
         combine(currentPageFlow.debounce(10_000), isPausedFlow) { currentPage, isPaused ->
             if (!isPaused) {
                 if (currentPage >= items.count() - 1) {
+                    /** When we reach the end reset to page 0 */
                     pagerState.animateScrollToPage(0)
                 } else {
                     pagerState.animateScrollToPage(currentPage + 1)
