@@ -34,10 +34,24 @@ val Typography = Typography(
         lineHeight = 11.sp,
     ),
 
+    bodyLarge = TextStyle(
+        fontFamily = orbitronFontFamily,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 14.sp,
+        lineHeight = 11.sp,
+    ),
+
     bodyMedium = TextStyle(
         fontFamily = orbitronFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 13.sp,
         lineHeight = 16.sp,
     ),
+
+    bodySmall = TextStyle(
+        fontFamily = orbitronFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 11.sp,
+        lineHeight = 14.sp,
+    )
 )

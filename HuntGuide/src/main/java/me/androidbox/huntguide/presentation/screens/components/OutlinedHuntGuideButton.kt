@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,10 +47,18 @@ fun OutlinedHuntGuideButton(
 
         Spacer(modifier = Modifier.width(8.dp))
 
-        Column() {
-            Text(text = stringResource(R.string.start_button_title).uppercase(), color = Color.White, fontSize = 14.sp)
+        Column {
+            Text(
+                text = stringResource(R.string.start_button_title).uppercase(),
+                color = Color.White,
+                style = MaterialTheme.typography.bodyLarge,
+            )
 
-            Text(text = stringResource(R.string.start_button_subtitle), color = Color.White, fontSize = 11.sp)
+            Text(
+                text = stringResource(R.string.start_button_subtitle),
+                color = Color.White,
+                style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }
