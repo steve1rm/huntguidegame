@@ -39,6 +39,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import me.androidbox.huntguide.R
@@ -68,18 +70,20 @@ fun <T> HuntGuideItemPager(
         mutableStateOf(false)
     }
 
+    val currentPageFlow = snapshotFlow { pagerState.currentPage }
+    val isPausedFlow = snapshotFlow { isPaused }
+
     LaunchedEffect(true) {
-        snapshotFlow { pagerState.currentPage }
-            /** Sets the slider duration */
-            .debounce(2000)
-            .collect { page ->
-                if(page >= items.count() -1) {
+        /** Sets the slider duration of 2 seconds*/
+        combine(currentPageFlow.debounce(2_000), isPausedFlow) { currentPage, isPaused ->
+            if (!isPaused) {
+                if (currentPage >= items.count() - 1) {
                     pagerState.animateScrollToPage(0)
-                }
-                else {
-                    pagerState.animateScrollToPage(page + 1)
+                } else {
+                    pagerState.animateScrollToPage(currentPage + 1)
                 }
             }
+        }.collect()
     }
 
     Column(
@@ -134,7 +138,6 @@ fun <T> HuntGuideItemPager(
 
             when(pageIndex) {
                 in items.indices -> {
-                    isPaused = false
                     content(items[pageIndex])
                 }
 
