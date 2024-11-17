@@ -8,6 +8,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,6 +32,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -44,6 +47,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.FlowPreview
@@ -51,6 +56,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
+import me.androidbox.huntguide.R
 
 @Composable
 fun <T> HuntGuideItemPager(
@@ -91,23 +97,27 @@ fun <T> HuntGuideItemPager(
     }
 
     Column(
-        modifier = modifier.fillMaxSize().padding(horizontal = 16.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        Spacer(modifier = Modifier.height(16.dp))
+
         Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically) {
 
-            Icon(
+            Image(
                 modifier = Modifier.clickable(
                     onClick = onCloseClicked
-                ),
-                imageVector = Icons.Default.Close,
+                ).size(16.dp),
+                painter = painterResource(R.drawable.cross),
                 contentDescription = "Close the hunt guide",
-                tint = Color.White
             )
 
+            /** Indicators */
             repeat(pagerState.pageCount) { iteration ->
                 val color by animateColorAsState(
                     targetValue =  if (pagerState.currentPage < iteration) Color.LightGray else Color.DarkGray,
@@ -123,6 +133,8 @@ fun <T> HuntGuideItemPager(
                 )
             }
         }
+
+        Spacer(modifier = Modifier.height(32.dp))
 
         HorizontalPager(
             state = pagerState,
@@ -150,4 +162,16 @@ fun <T> HuntGuideItemPager(
             }
         }
     }
+}
+@Preview
+@Composable
+fun HuntGuideItemPagerPreview() {
+    val items = listOf(1, 2, 3)
+    HuntGuideItemPager(
+        items = items,
+        content = {
+            Text(text = "Item: $it")
+        },
+        onCloseClicked = { }
+    )
 }
