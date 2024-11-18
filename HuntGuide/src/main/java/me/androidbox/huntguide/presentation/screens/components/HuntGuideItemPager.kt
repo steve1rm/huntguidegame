@@ -1,7 +1,10 @@
-@file:OptIn(ExperimentalFoundationApi::class, FlowPreview::class)
+@file:OptIn(ExperimentalFoundationApi::class, FlowPreview::class, ExperimentalAnimationApi::class)
 
 package me.androidbox.huntguide.presentation.screens.components
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -109,11 +112,17 @@ fun <T> HuntGuideItemPager(
                 val resIndicator =
                     if (pagerState.currentPage < iteration) R.drawable.dark_indicator else R.drawable.white_indicator
 
-                Image(
-                    modifier = Modifier.size(width = 16.dp, height = 6.dp),
-                    painter = painterResource(id = resIndicator),
-                    contentDescription = null
-                )
+                Crossfade(
+                    targetState = resIndicator,
+                    animationSpec = tween(500)
+                ) { resourceId ->
+
+                    Image(
+                        modifier = Modifier.size(width = 16.dp, height = 6.dp),
+                        painter = painterResource(id = resourceId),
+                        contentDescription = null
+                    )
+                }
             }
         }
 
